@@ -15,7 +15,7 @@
 
 
 ;;;###autoload
-;; Functions
+;; Class declaration
 (defun make-class-declaration (class-name namespace)
   (let* ((upcase-name (upcase class-name))
 	 (definition (concat "__" upcase-name "_H__"))
@@ -49,6 +49,12 @@
 			    "#endif /* " definition " */\n")))
     (concat preamble class-content postamble)))
 
+(defun cj-make-class-declaration (class-name namespace)
+  "The doc string"
+  (interactive "sClass-name: \nsNamespace: ")
+  (insert (make-class-declaration class-name namespace)))
+
+;; Class implementation
 (defun make-class-implementation (class-name namespace)
   (let* ((namespace-p (not (equal namespace "")))
 	 (ns-indent (when namespace-p "  ")))
@@ -61,15 +67,28 @@
 	    ns-indent "}\n"
 	    (when namespace-p "}\n"))))
 
-(defun cj-make-class-declaration (class-name namespace)
-  "The doc string"
-  (interactive "sClass-name: \nsNamespace: ")
-  (insert (make-class-declaration class-name namespace)))
-
 (defun cj-make-class-implementation (class-name namespace)
   "The doc string"
   (interactive "sClass-name: \nsNamespace: ")
   (insert (make-class-implementation class-name namespace)))
+
+;; Main environment
+(defun make-main-environment ()
+  (let ((preamble (concat "#include <iostream>\n"
+			  "#include <cstdlib>\n")))
+    (concat preamble
+	    "\n\n"
+	    "int main(int argc, char** argv) {\n"
+	    "  int nReturnvalue = EXIT_FAILURE;\n\n"
+	    "  // Code here.\n"
+	    "  nReturnvalue = EXIT_SUCCESS;\n\n"
+	    "  return nReturnvalue;\n"
+	    "}\n")))
+
+(defun cj-make-main-environment ()
+  "The doc string"
+  (interactive)
+  (insert (make-main-environment)))
 
 
 ;;; CodeJockey.el ends here
