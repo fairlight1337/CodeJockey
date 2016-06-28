@@ -5,7 +5,10 @@ This Emacs package contains functions for automating routine tasks when coding. 
 
 In its first, bare version, it supports the auto-generation of C++ class code, specifically the declaration and implementation:
 
+  * Declaration of a class: `M-x cj-make-class-declaration`, arguments: `class-name [namespace]`
 
-  * Declaration of a class: `M-x cj-make-class-declaration`, arguments: `class-name`, `[namespace]`
+  * Implementation of a class: `M-x cj-make-class-implementation`, arguments: `class-name [namespace]`
 
-  * Implementation of a class: `M-x cj-make-class-implementation`, arguments: `class-name`, `[namespace]`
+And generating a `main` function environment:
+
+  * Inserting a `main` environment: `M-x cj-make-main-environment`
